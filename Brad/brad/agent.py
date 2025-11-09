@@ -1,5 +1,5 @@
 """
-Main agent definition for the Lead Manager Agent.
+Agent definitions for Brad.
 """
 
 from google.adk.agents import Agent
