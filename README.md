@@ -5,57 +5,23 @@ This project demonstrates Google ADK (Agent Development Kit) integration with Fa
 
 ## Phase 1.1: Basic Agent Deployment ✅
 
-### What Was Built
-- **Brad Pitt Agent**: A conversational AI that responds in character as Brad Pitt
-- **AgentRunner Class**: Reusable wrapper for ADK agent execution with session management
-- **FastAPI API**: REST endpoint exposing the agent via HTTP
-- **Docker Deployment**: Containerized application ready for cloud deployment
+Built a production-ready Brad Pitt conversational agent with Google ADK integration. Created reusable AgentRunner class for session management, exposed via FastAPI REST endpoints, containerized with Docker, and successfully deployed to Google Cloud Run.
 
-### Technical Stack
-- **Google ADK**: Agent runtime and session management
-- **FastAPI**: Web API framework
-- **AgentRunner**: Custom class for agent lifecycle management
-- **Docker**: Containerization
-- **Google Cloud Run**: Deployment platform
+- **Brad Pitt Agent**: Character-based conversational AI
+- **AgentRunner Class**: Reusable ADK wrapper with session management  
+- **FastAPI REST API**: HTTP endpoints with auto-documentation
+- **Docker + Cloud Run**: Containerized deployment on port 8080
+- **Postman Testing**: Validated API functionality
 
-### Key Components
+## Phase 1.2: Image Generation Tool Integration ✅
 
-#### 1. Agent Definition (`brad/agent.py`)
-```python
-agent_brad = Agent(
-    name="BradAgent",
-    description="You will act like Brad pitt in all of your responses.",
-    model=MODEL
-)
-```
+Extended the agent framework with image generation capabilities using Google ADK Function Tools. Created Angelina Jolie agent that combines character roleplay with artistic image creation through a "magical canvas" metaphor.
 
-#### 2. AgentRunner Class (`agent_runner.py`)
-- Session management per user
-- Concurrent user support
-- Error handling and logging
-- Reusable with any ADK agent
-
-#### 3. FastAPI Endpoints (`fastapi_app.py`)
-- `POST /chat` - Main chat interface
-- `GET /health` - Health check
-- `GET /sessions/{user_id}` - Session info
-- Auto-generated API documentation
-
-### Deployment
-- **Platform**: Google Cloud Run
-- **Port**: 8080
-- **Status**: Successfully deployed and tested
-- **API Testing**: Validated with Postman
-
-### Usage Example
-```json
-POST /chat
-{
-  "prompt": "Hey Brad, what's your favorite movie role?",
-  "user_id": "user123",
-  "session_id": "chat001"
-}
-```
+- **Angelina Jolie Agent**: Character AI with artistic personality
+- **Function Tool**: `generate_image()` using `gemini-2.5-flash-image` model
+- **Vertex AI Integration**: Configured `genai.Client` for Google Cloud
+- **Image Generation**: Text-to-image generation with local file saving
+- **Tool Testing**: Validated image generation workflow
 
 ## Future Development Phases
 
