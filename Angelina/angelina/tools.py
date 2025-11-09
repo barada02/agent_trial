@@ -4,11 +4,19 @@ import io
 from google import genai
 from google.genai import types
 from PIL import Image
+from dotenv import load_dotenv
 
-# Initialize the Gemini client (ADK handles authentication)
-client = genai.Client()
+# Load environment variables
+load_dotenv()
 
-def generate_image(prompt: str, size: str = "1024x1024") -> dict:
+# Initialize the Gemini client for Vertex AI
+client = genai.Client(
+    vertexai=True,
+    project=os.getenv("GOOGLE_CLOUD_PROJECT"),
+    location=os.getenv("CLOUD_PROJECT_REGION", "us-central1")
+)
+
+def generate_image(prompt: str, aspect_ratio: str = "1:1") -> dict:
     """
     Generates an image from a detailed text prompt using the gemini-2.5-flash-image model.
 
@@ -20,13 +28,7 @@ def generate_image(prompt: str, size: str = "1024x1024") -> dict:
     try:
         response = client.models.generate_content(
             model="gemini-2.5-flash-image",
-            contents=[prompt],
-            config=types.GenerateContentConfig(
-                image_generation_config=types.ImageGenerationConfig(
-                    number_of_images=1,
-                    aspect_ratio=size
-                )
-            )
+            contents=[prompt]
         )
 
         if response.candidates and response.candidates[0].content.parts:
