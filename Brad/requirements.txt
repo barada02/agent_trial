@@ -1,2 +1,5 @@
 google-adk
 deprecated
+fastapi
+uvicorn[standard]
+python-dotenv
