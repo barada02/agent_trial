@@ -224,7 +224,7 @@ async def general_exception_handler(request, exc):
 if __name__ == "__main__":
     uvicorn.run(
         "fastapi_app:app",
-        host="127.0.0.1",  # Changed from 0.0.0.0 to localhost
+        host="0.0.0.0",  # Changed from 0.0.0.0 to localhost
         port=8080,
         reload=True,
         log_level="info"

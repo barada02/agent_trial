@@ -1,33 +1,24 @@
-# Use Python 3.12 (more stable than 3.13 for production)
-FROM python:3.12-slim
+# Use the official Python runtime as a parent image
+FROM python:3.11-slim
 
-# Set working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    #curl \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copy requirements first for better layer caching
+# Copy the requirements file into the container
 COPY requirements.txt .
 
-# Install Python dependencies
+# Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
+# Copy the rest of the application code into the container
 COPY . .
 
-# Set environment variables
-ENV PYTHONPATH=/app
-ENV PYTHONUNBUFFERED=1
-
-# Expose port (Cloud Run will override this)
+# Make port 8080 available to the world outside this container
+# Google Cloud Run uses port 8080 by default
 EXPOSE 8080
 
-# Health check
-#HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-#    CMD curl -f http://localhost:8080/health || exit 1
+# Set environment variable for the port
+ENV PORT=8080
 
-# Command to run the FastAPI application
+# Run the application when the container launches
 CMD ["python", "fastapi_app.py"]
